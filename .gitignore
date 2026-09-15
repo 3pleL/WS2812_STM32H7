@@ -1,0 +1,45 @@
+# Build output
+build/
+Debug/
+Release/
+out/
+cmake-build-*/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+compile_commands.json
+CMakePresets.json.user
+
+# Compiled objects / binaries / firmware images
+*.o
+*.obj
+*.a
+*.elf
+*.bin
+*.hex
+*.map
+*.list
+*.su
+*.cyclo
+*.d
+
+# STM32CubeMX / CubeIDE
+*.launch
+.mxproject
+*.bak
+
+# Editor / IDE
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/settings.json
+.idea/
+*.user
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
