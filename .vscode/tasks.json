@@ -60,6 +60,64 @@
                 "Build (Debug)"
             ],
             "problemMatcher": []
+        },
+        {
+            "label": "CMake Configure (Release)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--preset",
+                "Release"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Build (Release)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "build/Release"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "dependsOn": [
+                "CMake Configure (Release)"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Clean (Release)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "build/Release",
+                "--target",
+                "clean"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Flash (Release)",
+            "type": "shell",
+            "command": "C:\\ST\\STM32CubeCLT_1.22.0\\STM32CubeProgrammer\\bin\\STM32_Programmer_CLI.exe",
+            "args": [
+                "-c",
+                "port=SWD",
+                "mode=UR",
+                "-d",
+                "${workspaceFolder}/build/Release/WS2812_STM32H7.elf",
+                "-rst"
+            ],
+            "dependsOn": [
+                "Build (Release)"
+            ],
+            "problemMatcher": []
         }
     ]
 }
