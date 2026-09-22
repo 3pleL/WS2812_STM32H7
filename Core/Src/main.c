@@ -70,6 +70,9 @@ int main(void) {
 
   /* USER CODE BEGIN 1 */
 
+  // Enable the CPU instruction cache to speed up code execution from Flash.
+  SCB_EnableICache();
+
   /* USER CODE END 1 */
 
   /* MPU Configuration--------------------------------------------------------*/
