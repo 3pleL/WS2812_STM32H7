@@ -263,6 +263,10 @@ void DMA_TransferError(DMA_HandleTypeDef *DmaHandle) {
 
 void DMA_TransferHalfHandler(DMA_HandleTypeDef *DmaHandle) {
 
+#if defined(LED_BLUE_PORT)
+  LED_BLUE_PORT->BSRR = LED_BLUE_PIN;
+#endif
+
   // Is this the last LED?
   if (ws2812b.repeatCounter == WS2812B_NUMBER_OF_LEDS) {
 
@@ -279,9 +283,17 @@ void DMA_TransferHalfHandler(DMA_HandleTypeDef *DmaHandle) {
 
     ws2812b.repeatCounter++;
   }
+
+#if defined(LED_BLUE_PORT)
+  LED_BLUE_PORT->BSRR = (uint32_t)LED_BLUE_PIN << 16;
+#endif
 }
 
 void DMA_TransferCompleteHandler(DMA_HandleTypeDef *DmaHandle) {
+
+#if defined(LED_BLUE_PORT)
+  LED_BLUE_PORT->BSRR = LED_BLUE_PIN;
+#endif
 
 #if defined(LED_ORANGE_PORT)
   LED_ORANGE_PORT->BSRR = LED_ORANGE_PIN;
@@ -333,12 +345,20 @@ void DMA_TransferCompleteHandler(DMA_HandleTypeDef *DmaHandle) {
   }
 
 #if defined(LED_ORANGE_PORT)
-  LED_ORANGE_PORT->BSRR = LED_ORANGE_PIN << 16;
+  LED_ORANGE_PORT->BSRR = (uint32_t)LED_ORANGE_PIN << 16;
+#endif
+
+#if defined(LED_BLUE_PORT)
+  LED_BLUE_PORT->BSRR = (uint32_t)LED_BLUE_PIN << 16;
 #endif
 }
 
 // TIM2 Interrupt Handler gets executed on every TIM2 Update if enabled
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+#if defined(LED_ORANGE_PORT)
+  LED_ORANGE_PORT->BSRR = LED_ORANGE_PIN;
+#endif
+
   ws2812b.timerPeriodCounter = 0;
   TIM2->CR1 = 0; // disable timer
 
@@ -354,6 +374,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
   // set transfer_complete flag
   ws2812b.transferComplete = 1;
+
+#if defined(LED_ORANGE_PORT)
+  LED_ORANGE_PORT->BSRR = (uint32_t)LED_ORANGE_PIN << 16;
+#endif
 }
 
 static void ws2812b_set_pixel(uint8_t row, uint16_t column, uint8_t red,
