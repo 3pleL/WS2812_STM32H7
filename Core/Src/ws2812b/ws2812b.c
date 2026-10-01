@@ -75,7 +75,7 @@ static void ws2812b_gpio_init(void) {
   GPIO_InitStruct.Pin = WS2812B_PINS;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(WS2812B_PORT, &GPIO_InitStruct);
 
 // Enable output pins for debuging to see DMA Full and Half transfer interrupts
@@ -109,6 +109,14 @@ static void TIM2_init(void) {
   __HAL_TIM_SET_AUTORELOAD(&htim2, tim_period);
   __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, cc1);
   __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, cc2);
+
+  // MX_TIM2_Init() enables auto-reload preload but leaves the active ARR at its
+  // reset value (0xFFFFFFFF).
+  // Force an update event here so ARR/CCR shadow values (set in
+  // __HAL_TIM_SET_AUTORELOAD) load
+  // immediately, then clear the resulting update flag.
+  TIM2->EGR = TIM_EGR_UG;
+  __HAL_TIM_CLEAR_FLAG(&htim2, TIM_FLAG_UPDATE);
 
   // TIM2 NVIC interrupt is enabled by MX_TIM2_Init() (TIM2_IRQn)
 
