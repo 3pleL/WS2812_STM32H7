@@ -380,6 +380,11 @@ static void ws2812b_set_pixel(uint8_t row, uint16_t column, uint8_t red,
         (((((invBlue) << i) & 0x80) >> 7) << (row + 0));
   }
 #elif defined(SETPIX_3)
+  uint32_t calcClearRow = ~((0x01 << row) << 0);
+
+  ws2812bDmaBitBuffer[(calcCol + 0)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 8 + 0)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 16 + 0)] &= calcClearRow;
   ws2812bDmaBitBuffer[(calcCol + 0)] |=
       (((((invGreen) << 0) & 0x80) >> 7) << row);
   ws2812bDmaBitBuffer[(calcCol + 8 + 0)] |=
@@ -387,6 +392,9 @@ static void ws2812b_set_pixel(uint8_t row, uint16_t column, uint8_t red,
   ws2812bDmaBitBuffer[(calcCol + 16 + 0)] |=
       (((((invBlue) << 0) & 0x80) >> 7) << row);
 
+  ws2812bDmaBitBuffer[(calcCol + 1)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 8 + 1)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 16 + 1)] &= calcClearRow;
   ws2812bDmaBitBuffer[(calcCol + 1)] |=
       (((((invGreen) << 1) & 0x80) >> 7) << row);
   ws2812bDmaBitBuffer[(calcCol + 8 + 1)] |=
@@ -394,6 +402,9 @@ static void ws2812b_set_pixel(uint8_t row, uint16_t column, uint8_t red,
   ws2812bDmaBitBuffer[(calcCol + 16 + 1)] |=
       (((((invBlue) << 1) & 0x80) >> 7) << row);
 
+  ws2812bDmaBitBuffer[(calcCol + 2)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 8 + 2)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 16 + 2)] &= calcClearRow;
   ws2812bDmaBitBuffer[(calcCol + 2)] |=
       (((((invGreen) << 2) & 0x80) >> 7) << row);
   ws2812bDmaBitBuffer[(calcCol + 8 + 2)] |=
@@ -401,6 +412,9 @@ static void ws2812b_set_pixel(uint8_t row, uint16_t column, uint8_t red,
   ws2812bDmaBitBuffer[(calcCol + 16 + 2)] |=
       (((((invBlue) << 2) & 0x80) >> 7) << row);
 
+  ws2812bDmaBitBuffer[(calcCol + 3)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 8 + 3)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 16 + 3)] &= calcClearRow;
   ws2812bDmaBitBuffer[(calcCol + 3)] |=
       (((((invGreen) << 3) & 0x80) >> 7) << row);
   ws2812bDmaBitBuffer[(calcCol + 8 + 3)] |=
@@ -408,6 +422,9 @@ static void ws2812b_set_pixel(uint8_t row, uint16_t column, uint8_t red,
   ws2812bDmaBitBuffer[(calcCol + 16 + 3)] |=
       (((((invBlue) << 3) & 0x80) >> 7) << row);
 
+  ws2812bDmaBitBuffer[(calcCol + 4)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 8 + 4)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 16 + 4)] &= calcClearRow;
   ws2812bDmaBitBuffer[(calcCol + 4)] |=
       (((((invGreen) << 4) & 0x80) >> 7) << row);
   ws2812bDmaBitBuffer[(calcCol + 8 + 4)] |=
@@ -415,6 +432,9 @@ static void ws2812b_set_pixel(uint8_t row, uint16_t column, uint8_t red,
   ws2812bDmaBitBuffer[(calcCol + 16 + 4)] |=
       (((((invBlue) << 4) & 0x80) >> 7) << row);
 
+  ws2812bDmaBitBuffer[(calcCol + 5)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 8 + 5)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 16 + 5)] &= calcClearRow;
   ws2812bDmaBitBuffer[(calcCol + 5)] |=
       (((((invGreen) << 5) & 0x80) >> 7) << row);
   ws2812bDmaBitBuffer[(calcCol + 8 + 5)] |=
@@ -422,6 +442,9 @@ static void ws2812b_set_pixel(uint8_t row, uint16_t column, uint8_t red,
   ws2812bDmaBitBuffer[(calcCol + 16 + 5)] |=
       (((((invBlue) << 5) & 0x80) >> 7) << row);
 
+  ws2812bDmaBitBuffer[(calcCol + 6)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 8 + 6)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 16 + 6)] &= calcClearRow;
   ws2812bDmaBitBuffer[(calcCol + 6)] |=
       (((((invGreen) << 6) & 0x80) >> 7) << row);
   ws2812bDmaBitBuffer[(calcCol + 8 + 6)] |=
@@ -429,6 +452,9 @@ static void ws2812b_set_pixel(uint8_t row, uint16_t column, uint8_t red,
   ws2812bDmaBitBuffer[(calcCol + 16 + 6)] |=
       (((((invBlue) << 6) & 0x80) >> 7) << row);
 
+  ws2812bDmaBitBuffer[(calcCol + 7)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 8 + 7)] &= calcClearRow;
+  ws2812bDmaBitBuffer[(calcCol + 16 + 7)] &= calcClearRow;
   ws2812bDmaBitBuffer[(calcCol + 7)] |=
       (((((invGreen) << 7) & 0x80) >> 7) << row);
   ws2812bDmaBitBuffer[(calcCol + 8 + 7)] |=
